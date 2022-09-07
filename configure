@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+while [[ $# -gt 0 ]]; do
+    IFS='=' read -ra ARG <<< "$1"
+    case ${ARG[0]} in
+        --prefix)
+        PREFIX=${ARG[1]}
+    esac
+    shift
+done
+
+printf "\n\ncheck:" >> Makefile
+printf "\n\t@echo 'dummy check target'" >> Makefile
+
+printf "\n\ninstall:" >> Makefile
+printf "\n\t@mkdir -p $PREFIX/bin" >> Makefile
+printf "\n\t@cp hello $PREFIX/bin" >> Makefile
